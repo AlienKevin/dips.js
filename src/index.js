@@ -1,10 +1,18 @@
 class BertModel {
-    static async init() {
+    static async init(silent = true) {
+        // TODO: silent fs.writeSync in node
+        if (silent) {
+            var originalConsoleError = console.error;
+            console.error = function () { };
+        }
         const model = new BertModel();
         model.Module = await Module();
         const modelName = 'bert.gguf';
         model.Module.FS_createDataFile("/", modelName, bertModelWeight, true, true);
         model.instance = model.Module.init(modelName);
+        if (silent) {
+            console.error = originalConsoleError;
+        }
         return model;
     }
 
