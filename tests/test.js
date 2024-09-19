@@ -1,6 +1,6 @@
 async function testBertModel() {
     try {
-        const { BertModel } = await import('../dist/main.js');
+        const { BertModel } = await import('dips.js');
         const model = await BertModel.init();
 
         const inputText = "阿張先生嗰時好nice㗎";
