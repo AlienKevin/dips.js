@@ -1,31 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import Module from './libbert.js';
-
 class BertModel {
-    constructor() {
-        this.instance = null;
-        this.moduleLoaded = false;
-    }
-
-    async init(modelPath) {
-        this.Module = await Module();
-
-        return new Promise((resolve, reject) => {
-            fs.readFile(modelPath, (err, data) => {
-                if (err) {
-                    reject(`Failed to load model file: ${err}`);
-                    return;
-                }
-
-                const modelFileName = path.basename(modelPath);
-                console.log('Loading model:', modelFileName);
-                this.Module.FS_createDataFile("/", modelFileName, data, true, true);
-                this.instance = this.Module.init(modelFileName);
-                console.log('Model loaded successfully');
-                resolve();
-            });
-        });
+    static async init() {
+        const model = new BertModel();
+        model.Module = await Module();
+        const modelName = 'bert.gguf';
+        model.Module.FS_createDataFile("/", modelName, bertModelWeight, true, true);
+        model.instance = model.Module.init(modelName);
+        return model;
     }
 
     async cut(text, mode = 'fine') {
@@ -52,8 +32,6 @@ class BertModel {
         const dipsResult = text.split('').map((char, index) =>
             `${['-', '', '|', ' '][predictions[index]]}${char}`
         ).join('').trimStart();
-
-        console.log(dipsResult);
 
         switch (mode) {
             case 'fine':
