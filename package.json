@@ -1,0 +1,26 @@
+{
+  "name": "dips.js",
+  "version": "0.0.1",
+  "description": "Multi-criteria Cantonese segmentation with dashes, intermediates, pipes, and spaces.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlienKevin/dips.js.git"
+  },
+  "type": "module",
+  "keywords": [
+    "cantonese",
+    "chinese",
+    "tokenization",
+    "nlp"
+  ],
+  "author": "Kevin Xiang Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlienKevin/dips.js/issues"
+  },
+  "homepage": "https://github.com/AlienKevin/dips.js#readme"
+}
