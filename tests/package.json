@@ -10,5 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "dips.js": "file:../"
-  }
+  },
+  "private": true
 }
