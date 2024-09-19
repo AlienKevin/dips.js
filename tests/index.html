@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIPS.js Test</title>
+</head>
+
+<body>
+    <script type="module" src="../dist/main.js"></script>
+    <script type="module">try {
+            const { BertModel } = await import('../dist/main.js');
+            const model = await BertModel.init();
+
+            const inputText = "阿張先生嗰時好nice㗎";
+            const result = await model.cut(inputText);
+
+            console.log("Input:", inputText);
+            console.log("Segmented output:", result);
+        } catch (error) {
+            console.error("Error:", error);
+        }</script>
+</body>
+
+</html>

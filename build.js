@@ -18,8 +18,17 @@ const indexContent = fs.readFileSync(indexPath, 'utf-8');
 
 // Combine the files
 const combinedContent = `
+// https://stackoverflow.com/a/61454823
+const universalAtob = b64Encoded => {
+    try {
+      return atob(b64Encoded);
+    } catch (err) {
+      return Buffer.from(b64Encoded, 'base64').toString();
+    }
+};
+
 // Decoded GGUF model
-const bertModelWeight = Buffer.from("${ggufBase64}", 'base64');
+const bertModelWeight = universalAtob("${ggufBase64}");
 
 // libbert.js content
 ${libbertContent}
