@@ -8,9 +8,9 @@
 </head>
 
 <body>
-    <script type="module" src="../dist/main.js"></script>
     <script type="module">try {
             const { BertModel } = await import('../dist/main.js');
+            // const { BertModel } = await import('https://unpkg.com/dips.js/dist/main.js');
             const model = await BertModel.init();
 
             const inputText = "阿張先生嗰時好nice㗎";

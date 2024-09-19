@@ -13,7 +13,9 @@ npm install dips.js
 ## Via CDN
 
 ```html
-<script src="https://unpkg.com/dips.js/dist/main.js" type="module"></script>
+<script type="module">
+const { BertModel } = await import('https://unpkg.com/dips.js/dist/main.js');
+</script>
 ```
 
 ## Usage
