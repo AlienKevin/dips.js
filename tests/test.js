@@ -1,13 +1,15 @@
 async function testBertModel() {
     try {
         const { BertModel } = await import('dips.js');
-        const model = await BertModel.init();
 
-        const inputText = "阿張先生嗰時好nice㗎";
-        const result = await model.cut(inputText);
+        for (let i = 0; i < 100; i++) {
+            const model = await BertModel.init();
 
-        console.log("Input:", inputText);
-        console.log("Segmented output:", result);
+            const inputText = "阿張先生嗰時好nice㗎";
+            const result = await model.cut(inputText, 'dips_str');
+
+            console.assert(result === "阿-張|先生 嗰-時 好 nice 㗎")
+        }
     } catch (error) {
         console.error("Error:", error);
     }
