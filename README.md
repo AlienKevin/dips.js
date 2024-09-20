@@ -35,4 +35,8 @@ const { BertModel } = await import('https://unpkg.com/dips.js/dist/main.js');
 
 >>> await model.cut('阿張先生嗰時好nice㗎', mode='dips')
 ['S', 'D', 'P', 'I', 'S', 'D', 'S', 'S', 'I', 'I', 'I', 'S']
+
+>>> model.free()
 ```
+
+Note: BertModel.init() always returns the same model instance. Only free the model when you're done with all instances.
