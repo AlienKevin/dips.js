@@ -1,19 +1,23 @@
 class BertModel {
-    static async init(silent = true) {
-        // TODO: silent fs.writeSync in node
-        if (silent) {
-            var originalConsoleError = console.error;
-            console.error = function () { };
-        }
+    static module = Module();
+    static modelInitialized = false;
+
+    static async init() {
         const model = new BertModel();
-        model.Module = await Module();
-        const modelName = 'bert.gguf';
-        model.Module.FS_createDataFile("/", modelName, bertModelWeight, true, true);
-        model.instance = model.Module.init(modelName);
-        if (silent) {
-            console.error = originalConsoleError;
+        if (!BertModel.modelInitialized) {
+            const modelName = 'bert.gguf';
+            (await BertModel.module).FS_createDataFile("/", modelName, bertModelWeight, true, true);
+            const success = (await BertModel.module).init(modelName);
+            if (!success) {
+                throw new Error('Failed to initialize model');
+            }
+            BertModel.modelInitialized = true;
         }
         return model;
+    }
+
+    async free() {
+        (await BertModel.module).free();
     }
 
     async cut(text, mode = 'fine') {
@@ -21,7 +25,7 @@ class BertModel {
             throw new TypeError('Input text must be a string');
         }
 
-        const logits = this.Module.run(this.instance, text);
+        const logits = (await BertModel.module).run(text);
         const N_TAGS = 4;
         const predictions = [];
 
