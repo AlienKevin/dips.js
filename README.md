@@ -4,6 +4,8 @@ Multi-criteria Cantonese segmentation with **d**ashes, **i**ntermediates, **p**i
 
 Note: This package is still in beta, there might be breaking changes in the future.
 
+See https://github.com/AlienKevin/dips for more details on the segmentation model.
+
 ## Install
 
 ```sh
